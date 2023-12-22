@@ -73,6 +73,22 @@ mv $sysname-$build-$androidversion.0-Hanoip.zip ../../build
 
 clear
 echo "  Complete you can find the rom in Build folder"
+
+rm -fr Post.txt
+
+echo \"\" \" **$(date)**\" >> Post.txt
+echo \"\" \" \" >> Post.txt
+echo \"📱\" \" **$sysname-$build**\" >> Post.txt
+echo \"\" \" \" >> Post.txt
+echo \"⚡ **Android**\":\" $androidversion\" >> Post.txt
+echo \"🔒 **Security Patch**\":\" $securitypatch\" >> Post.txt
+echo \"⬇️ **Download**\":\" 'https://sourceforge.net/projects/oemports-hanoip/files/'\" >> Post.txt
+echo \"\" \" \" >> Post.txt
+echo \"👤 **By**\":\" @semisapeol 'https://t.me/semisapeol/'\" >> Post.txt
+echo \"🚶🏻 **Follow**\":\" @hanoipprojects\" >> Post.txt
+
+echo " "
+echo "  Data for Post has been dumped to Post.txt"
 """)
 
 L1()
