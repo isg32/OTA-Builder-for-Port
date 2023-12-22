@@ -7,21 +7,25 @@ ota builder for port roms
 Note: Keep a Backup of super.img
 ==========================================
 ```
+
 For issues contact [isg32 Telegram](https://t.me/isg32)
 
 > __Overview__
 This script automates the process of building an OTA package for ported ROMs. It gathers necessary information from the provided build.prop file and compresses the super.img. The resulting ROM package is stored in the Build folder.
+### Demo: <a href="https://youtu.be/NVH47s3dIvs" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/youtube.svg" alt="https://www.youtube.com/@isg32" height="30" width="40" /></a>
+
 
 >Prerequisites
 
 __Input Requirements:__
 * build.prop file with essential ROM information.
 * super.img file (Backup recommended).
+* Required files in Firmware [ boot.img  bootloader.img  dtbo.img  radio.img  vbmeta.img  vbmeta_system.img  vendor_boot.img ]
 * Usage
 * Clone the repository.
 ```bash
- git clone https://github.com/yourusername/otabuilder.git
- cd otabuilder
+ git clone https://github.com/isg32/OTA-Builder-for-Port.git
+ cd OTA-Builder-for-Port
 
 ```
 * Place the required files in the input directory.
