@@ -20,11 +20,12 @@ This script automates the process of building an OTA package for ported ROMs. It
 __Input Requirements:__
 * build.prop file with essential ROM information.
 * super.img file (Backup recommended).
+* Required files in Firmware [ boot.img  bootloader.img  dtbo.img  radio.img  vbmeta.img  vbmeta_system.img  vendor_boot.img ]
 * Usage
 * Clone the repository.
 ```bash
- git clone https://github.com/yourusername/otabuilder.git
- cd otabuilder
+ git clone https://github.com/isg32/OTA-Builder-for-Port.git
+ cd OTA-Builder-for-Port
 
 ```
 * Place the required files in the input directory.
