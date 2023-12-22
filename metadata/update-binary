@@ -1,0 +1,62 @@
+#!/sbin/sh
+
+OUTFD=/proc/self/fd/$2
+ZIPFILE="$3"
+
+ui_print() {
+  echo -e "ui_print $1\nui_print" >>$OUTFD
+}
+
+package_extract_file() {
+  ui_print " - Flashing $(echo $1 | awk -F "/" '{print $NF}') "
+  unzip -p "$ZIPFILE" $1 >$2
+}
+
+package_extract_pigz() {
+  ui_print " - Flashing $(echo $1 | awk -F "/" '{print $NF}') "
+  unzip -p "$ZIPFILE" $1 | pigz -c -d >$2
+}
+ui_print " "
+ui_print "============================================="
+ui_print "UD1A.230803.041 UD1A.230803.041"
+ui_print "Fingerprint: motorola/hanoip_retail/hanoip:11/RRIS31.Q1-42-51-12-1/01c61:user/release-keys"
+ui_print "Build: UD1A.230803.041"
+ui_print "Android: 14"
+ui_print "Security Patch: 2023-10-05"
+ui_print "====================(G)======================"
+ui_print " "
+ui_print " Flashing gpt, bootloader, vbmeta, vbmeta_system, radio, BTFM, dspso, logo..."
+ui_print " "
+package_extract_file "Firmware/gpt.bin" "/dev/block/bootdevice/by-name/partition"
+package_extract_file "Firmware/bootloader.img" "/dev/block/bootdevice/by-name/bootloader"
+package_extract_file "Firmware/vbmeta.img" "/dev/block/bootdevice/by-name/vbmeta_a"
+package_extract_file "Firmware/vbmeta_system.img" "/dev/block/bootdevice/by-name/vbmeta_system_a"
+package_extract_file "Firmware/radio.img" "/dev/block/bootdevice/by-name/radio"
+package_extract_file "Firmware/BTFM.img" "/dev/block/bootdevice/by-name/bluetooth"
+package_extract_file "Firmware/dspso.bin" "/dev/block/bootdevice/by-name/dsp"
+package_extract_file "Firmware/logo.bin" "/dev/block/bootdevice/by-name/logo"
+ui_print " -----------------------------------"
+ui_print " Flashing boot, vendor_boot, dtbo..."
+ui_print " "
+package_extract_file "Firmware/boot.img" "/dev/block/bootdevice/by-name/boot_a"
+package_extract_file "Firmware/vendor_boot.img" "/dev/block/bootdevice/by-name/vendor_boot_a"
+package_extract_file "Firmware/dtbo.img" "/dev/block/bootdevice/by-name/dtbo_a"
+ui_print " "
+ui_print " Done!"
+ui_print " "
+ui_print " -----------------------------------"
+ui_print " Flashing Super Partition..."
+ui_print " "
+package_extract_pigz "image/super.img.gz" "/dev/block/bootdevice/by-name/super"
+ui_print " "
+ui_print " Finalizing Installation... "
+ui_print " "
+bootctl set-active-boot-slot 0
+ui_print " Flashing Complete!"
+ui_print " "
+ui_print "==========================================="
+ui_print "|  Firmware installed! Erase recommended  |"
+ui_print "==========================================="
+
+exit 0
+    
